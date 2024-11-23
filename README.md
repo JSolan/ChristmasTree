@@ -6,11 +6,14 @@ This project is a Python application to control a WLED-powered LED strip or matr
 
 ---
 
+## Hardware
+
+Currently a [dig2go](https://dig2go.info/) 5v WLED controller plugged into a string of 100 rgb LEDs. (https://www.amazon.co.uk/BTF-LIGHTING-Decorative-Addressable-Christmas-Controller/dp/B08LKPF2PX). No affliation to either link. This is currently a cheap and cheerful setup to test the idea before likley going to 12V and something with a bit more oomph. 
+
 ## Features
 - Apply built-in WLED effects (e.g., Rainbow, Twinkle, Fireworks).
-- Reset segment configurations and unfreeze LEDs (`frz: false`).
 - Interactive terminal input for dynamic control of effects, palettes, and LED counts.
-- Modular design for scalability and maintainability.
+- See https://kno.wled.ge/ for more features of WLED
 
 ---
 
@@ -31,6 +34,8 @@ pip install -r requirements.txt
    - Enter the **Effect ID** (e.g., `9` for Rainbow).
    - Enter the **Palette ID** (default is `0`).
    - Enter the **Total Number of LEDs** in your strip or matrix.
+
+---
 
 ## Contributing
 Feel free to open issues or pull requests to improve the project! Contributions are always welcome.
