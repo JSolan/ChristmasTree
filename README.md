@@ -2,7 +2,7 @@
 
 ## WLED with Python
 
-This project is a Python application to control a WLED-powered LED strip or matrix. It allows you to apply effects, reset segments, and interact dynamically with the LEDs via the WLED JSON api. The plan is to record led locations in x,y,z planes so i can approximate a pixel display and set patterns. 
+This project is a Python application to control a WLED-powered LED strip or matrix. It allows you to apply effects, reset segments, and interact dynamically with the LEDs via the WLED JSON api. The plan is to record LED locations with open-cv in x,y,z planes so i can approximate a pixel display and set patterns. 
 
 ---
 
@@ -13,6 +13,7 @@ Currently a [dig2go](https://dig2go.info/) 5v WLED controller plugged into a str
 ## Features
 - Apply built-in WLED effects (e.g., Rainbow, Twinkle, Fireworks).
 - Interactive terminal input for dynamic control of effects, palettes, and LED counts.
+- Local webpage on main.py execution to select palettes and effects.
 - See https://kno.wled.ge/ for more features of WLED
 
 ---
