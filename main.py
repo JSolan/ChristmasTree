@@ -1,63 +1,50 @@
 import os
 from dotenv import load_dotenv
+from flask import Flask, render_template, request
 from app.api import WLEDAPI
+from app.control import reset_segment_and_apply_effect
+from app.WLED_data import get_effects_and_palettes
 
-def reset_segment_and_apply_effect(api, effect_id, palette_id=0, led_count=50):
-    """
-    Reset WLED segment configuration and apply an effect.
-    :param api: Instance of WLEDAPI.
-    :param effect_id: WLED effect ID to apply.
-    :param palette_id: WLED palette ID to apply.
-    :param led_count: Total number of LEDs in the strip.
-    """
-    payload = {
-        "on": True,  # Ensure LEDs are powered on
-        "seg": [
-            {
-                "id": 0,         # Segment ID
-                "start": 0,      # Start of segment
-                "stop": led_count,  # End of segment
-                "fx": effect_id,  # Effect ID
-                "pal": palette_id,  # Palette ID
-                "frz": False,    # Unfreeze the segment
-                "bri": 255       # Maximum brightness
-            }
-        ]
-    }
+# Load environment variables from .env
+load_dotenv()
+WLED_IP = os.getenv("WLED_IP")
 
-    print(f"Sending payload: {payload}")
-    response = api.set_state(payload)
+if not WLED_IP:
+    raise ValueError("WLED_IP is not set in the .env file")
 
-    if response:
-        print("Successfully applied effect and updated segment!")
-    else:
-        print("Failed to apply effect.")
+# Initialize Flask app and WLED API
+app = Flask(__name__)
+api = WLEDAPI(WLED_IP)
 
-def main():
-    # Load .env variables
-    load_dotenv()
-    WLED_IP = os.getenv("WLED_IP")
+@app.route("/", methods=["GET", "POST"])
+def index():
+    # Fetch dynamic data
+    effects, palettes = get_effects_and_palettes(api)
 
-    if not WLED_IP:
-        raise ValueError("WLED_IP is not set in .env file")
+    if request.method == "POST":
+        effect_id = int(request.form.get("effect_id"))
+        palette_id = int(request.form.get("palette_id"))
+        brightness = int(request.form.get("brightness"))
+        led_count = int(request.form.get("led_count"))
+        
+        # Apply effect with the selected parameters
+        payload = {
+            "on": True,
+            "bri": brightness,
+            "seg": [
+                {
+                    "id": 0,
+                    "start": 0,
+                    "stop": led_count,
+                    "fx": effect_id,
+                    "pal": palette_id,
+                    "frz": False
+                }
+            ]
+        }
+        api.set_state(payload)
 
-    # Initialize API
-    api = WLEDAPI(WLED_IP)
-    print(f"Connected to WLED at {WLED_IP}")
-
-    # Input effect and palette from the user
-    try:
-        effect_id = int(input("Enter effect ID (e.g., 9 for Rainbow): "))
-        palette_id = int(input("Enter palette ID (default is 0): ") or 0)
-        led_count = int(input("Enter the total number of LEDs (default is 50): ") or 50)
-
-        # Apply effect with segment reset
-        reset_segment_and_apply_effect(api, effect_id, palette_id, led_count)
-
-    except ValueError:
-        print("Invalid input. Please enter valid numbers for effect, palette, and LED count.")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    return render_template("index.html", effects=effects, palettes=palettes)
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)

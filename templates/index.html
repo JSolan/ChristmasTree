@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WLED Control</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>WLED Control Panel</h1>
+    <form method="POST">
+        <!-- Effects Dropdown -->
+        <label for="effect">Effect:</label>
+        <select name="effect_id" id="effect">
+            {% for effect_id, effect_name in effects.items() %}
+            <option value="{{ effect_id }}">{{ effect_name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <!-- Palettes Dropdown -->
+        <label for="palette">Palette:</label>
+        <select name="palette_id" id="palette">
+            {% for palette_id, palette_name in palettes.items() %}
+            <option value="{{ palette_id }}">{{ palette_name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <!-- Brightness Slider -->
+        <label for="brightness">Brightness:</label>
+        <input type="range" id="brightness" name="brightness" min="1" max="255" value="128">
+        <br>
+
+        <!-- LED Count -->
+        <label for="led_count">LED Count:</label>
+        <input type="number" id="led_count" name="led_count" value="50" min="1">
+        <br>
+
+        <button type="submit">Apply</button>
+    </form>
+</body>
+</html>

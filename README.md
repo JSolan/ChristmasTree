@@ -1,8 +1,8 @@
 # Christmas tree lights
 
-## WLED LED Control with Python
+## WLED with Python
 
-This project is a Python application to control a WLED-powered LED strip or matrix. It allows you to apply effects, reset segments, and interact dynamically with the LEDs via the WLED JSON API.
+This project is a Python application to control a WLED-powered LED strip or matrix. It allows you to apply effects, reset segments, and interact dynamically with the LEDs via the WLED JSON api. The plan is to record led locations in x,y,z planes so i can approximate a pixel display and set patterns. 
 
 ---
 
