@@ -33,4 +33,4 @@ def visualize_led_map(json_file):
     plt.show()
 
 if __name__ == "__main__":
-    visualize_led_map("led_map_3d_pixels.json")
+    visualize_led_map("led_map_3d.json")

@@ -1,0 +1,5 @@
+{
+    "wled_ip": "192.168.1.118",
+    "led_count":100,
+    "sequence_wait": 0.25
+}
