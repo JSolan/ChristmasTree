@@ -1,5 +1,5 @@
 import json
-from wled_utils.wled_controller import WLEDController
+from utils.wled_controller import WLEDController
 
 # Load configuration from config.json
 with open("config.json", "r") as config_file:

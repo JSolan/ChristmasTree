@@ -43,6 +43,7 @@ class WLEDController:
     def turn_on_single_led(self, led_id, color=(255, 255, 255), brightness=255):
         """
         Turns on a single LED and turns off all others.
+        :param id: The ID of the segment
         :param led_id: The ID of the LED to turn on.
         :param color: The RGB color tuple for the LED.
         :param brightness: Brightness of the LED (0-255).
@@ -67,6 +68,7 @@ class WLEDController:
     def turn_on_all_leds(self, color=(255, 255, 255), brightness=255):
         """
         Turns on all LEDs with the same color and brightness.
+        :param id: The ID of the segment
         :param color: The RGB color tuple for the LEDs.
         :param brightness: Brightness of the LEDs (0-255).
         """
